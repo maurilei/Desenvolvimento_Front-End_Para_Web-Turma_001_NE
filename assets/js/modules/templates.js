@@ -1,5 +1,5 @@
 /**
- * templates.js - Produção de marcação HTML dinâmica via Template Literals
+ * templates.js - Produção de marcação HTML dinâmica com foco em Acessibilidade (WCAG 2.1)
  */
 import { carregarVoluntarios } from './storage.js';
 
@@ -42,18 +42,20 @@ export function renderHome() {
       </div>
     </div>
 
-    <section class="grid-row">
+    <section class="grid-row" aria-label="Destaque da Instituição">
       <div class="col-12">
         <figure class="hero-figure">
-          <img src="assets/imagens/banner-principal.png" alt="Banner principal: Voluntários cultivando horta comunitária" width="1200" height="400">
-          <figcaption>Junte-se à nossa rede de solidariedade e transformação comunitária.</figcaption>
+          <img src="assets/imagens/banner-principal.png" alt="Voluntários cultivando alimentos frescos em horta comunitária ao ar livre" width="1200" height="400">
+          <figcaption style="margin-top: var(--space-xs); font-size: 0.9rem; color: var(--color-text-muted);">
+            Junte-se à nossa rede de solidariedade e transformação comunitária.
+          </figcaption>
         </figure>
       </div>
     </section>
 
-    <section class="grid-row">
+    <section class="grid-row" aria-label="Informações Institucionais">
       <div class="col-6">
-        <div class="card-project">
+        <article class="card-project">
           <div>
             <h2>Quem Somos</h2>
             <p style="margin-top: var(--space-xs);">
@@ -61,13 +63,13 @@ export function renderHome() {
             </p>
           </div>
           <figure style="margin-top: var(--space-sm);">
-            <img src="assets/imagens/icon ong.png" alt="Ícone da causa" style="max-height: 120px; object-fit: contain;">
+            <img src="assets/imagens/icon ong.png" alt="Símbolo representativo das mãos solidárias" style="max-height: 120px; object-fit: contain;">
           </figure>
-        </div>
+        </article>
       </div>
 
       <div class="col-6">
-        <div class="card-project">
+        <article class="card-project">
           <div>
             <h3>Nossa Missão</h3>
             <p style="margin-top: var(--space-xs);">
@@ -75,14 +77,13 @@ export function renderHome() {
             </p>
           </div>
           <a href="#/cadastro" class="btn-primary" style="margin-top: var(--space-md);">Quero Fazer Parte</a>
-        </div>
+        </article>
       </div>
     </section>
 
-    <section class="grid-row">
+    <section class="grid-row" aria-label="Canais de Comunicação">
       <div class="col-12">
         <div class="contact-box">
-          <img src="assets/imagens/icone-contato.svg" alt="Ícone de contato" class="contact-icon">
           <address style="font-style: normal;">
             <h3 style="margin-bottom: var(--space-xs);">Canais de Contato</h3>
             <p><strong>E-mail:</strong> contato@ongsolidaria.org.br</p>
@@ -98,16 +99,16 @@ export function renderHome() {
 export function renderProjetos() {
   const cardsHtml = listaProjetos.map(projeto => `
     <div class="col-4" id="${projeto.id}">
-      <article class="card-project">
+      <article class="card-project" aria-labelledby="titulo-${projeto.id}">
         <div>
           <span class="badge ${projeto.badgeClass}">${projeto.status}</span>
-          <h3 style="margin-top: var(--space-xs);">${projeto.titulo}</h3>
+          <h3 id="titulo-${projeto.id}" style="margin-top: var(--space-xs);">${projeto.titulo}</h3>
           <p style="margin-top: var(--space-xs);">${projeto.descricao}</p>
         </div>
         ${
           projeto.desabilitado
-            ? `<button class="btn-primary" disabled>${projeto.acaoTexto}</button>`
-            : `<button class="btn-primary btn-apoiar" data-projeto="${projeto.titulo}">${projeto.acaoTexto}</button>`
+            ? `<button class="btn-primary" disabled aria-disabled="true">${projeto.acaoTexto}</button>`
+            : `<button class="btn-primary btn-apoiar" data-projeto="${projeto.titulo}" aria-label="Apoiar projeto ${projeto.titulo}">${projeto.acaoTexto}</button>`
         }
       </article>
     </div>
@@ -117,7 +118,7 @@ export function renderProjetos() {
     <div class="grid-row">
       <div class="col-12">
         <h2>Projetos em Andamento</h2>
-        <p style="color: var(--color-neutral-medium); margin-top: var(--space-2xs);">
+        <p style="color: var(--color-text-muted); margin-top: var(--space-2xs);">
           Conheça as ações em campo e escolha onde apoiar.
         </p>
       </div>
@@ -135,45 +136,43 @@ export function renderCadastro() {
   return `
     <div class="grid-row">
       <div class="col-6" style="margin-inline: auto;">
-        <div class="alert alert-success">
-          <strong>Processo Seletivo 2026:</strong> Já contamos com <strong>${totalInscritos}</strong> voluntários cadastrados na rede!
-        </div>
-
-        <div class="card-project" style="background: var(--color-neutral-lightest);">
+        
+        <div class="card-project" style="background: var(--color-surface);">
           <h2>Seja um Voluntário</h2>
-          <p style="color: var(--color-neutral-medium); margin-bottom: var(--space-md);">
-            Preencha seus dados para receber o contato da nossa equipe de coordenação.
+          <p style="color: var(--color-text-muted); margin-bottom: var(--space-md);">
+            Cadastre-se na nossa rede. Atualmente já contamos com <strong>${totalInscritos}</strong> voluntários ativos!
           </p>
 
-          <form id="formVoluntario" novalidate>
+          <form id="formVoluntario" novalidate aria-label="Formulário de Inscrição de Voluntariado">
+            
             <div class="form-control">
-              <label for="nome">Nome Completo</label>
-              <input type="text" id="nome" class="form-input" placeholder="Ex: Ana Maria Silva" required>
-              <span class="form-feedback" id="feedback-nome"></span>
+              <label for="nome">Nome Completo (Obrigatório)</label>
+              <input type="text" id="nome" class="form-input" placeholder="Ex: Maria Silva" required aria-required="true" aria-describedby="feedback-nome">
+              <span class="form-feedback" id="feedback-nome" role="alert" aria-live="polite"></span>
             </div>
 
             <div class="form-control">
-              <label for="email">E-mail</label>
-              <input type="email" id="email" class="form-input" placeholder="exemplo@dominio.com" required>
-              <span class="form-feedback" id="feedback-email"></span>
+              <label for="email">E-mail de Contato (Obrigatório)</label>
+              <input type="email" id="email" class="form-input" placeholder="seu@email.com" required aria-required="true" aria-describedby="feedback-email">
+              <span class="form-feedback" id="feedback-email" role="alert" aria-live="polite"></span>
             </div>
 
             <div class="form-control">
-              <label for="telefone">Telefone / WhatsApp</label>
-              <input type="tel" id="telefone" class="form-input" placeholder="(11) 98888-7777" required>
-              <span class="form-feedback" id="feedback-telefone"></span>
+              <label for="telefone">Telefone / WhatsApp (Obrigatório)</label>
+              <input type="tel" id="telefone" class="form-input" placeholder="(11) 98888-7777" required aria-required="true" aria-describedby="feedback-telefone">
+              <span class="form-feedback" id="feedback-telefone" role="alert" aria-live="polite"></span>
             </div>
 
             <div class="form-control">
-              <label for="area">Área de Atuação</label>
-              <select id="area" class="form-select" required>
+              <label for="area">Área de Atuação (Obrigatório)</label>
+              <select id="area" class="form-select" required aria-required="true" aria-describedby="feedback-area">
                 <option value="">Selecione uma área de atuação</option>
                 <option value="Horta Solidária">Horta Solidária</option>
                 <option value="Reforço Escolar">Reforço Escolar</option>
                 <option value="Triagem de Mantimentos">Triagem de Mantimentos</option>
                 <option value="Comunicação e Apoio">Comunicação e Apoio</option>
               </select>
-              <span class="form-feedback" id="feedback-area"></span>
+              <span class="form-feedback" id="feedback-area" role="alert" aria-live="polite"></span>
             </div>
 
             <button type="submit" class="btn-primary" style="margin-top: var(--space-sm); width: 100%;">
@@ -181,6 +180,7 @@ export function renderCadastro() {
             </button>
           </form>
         </div>
+
       </div>
     </div>
   `;
@@ -191,7 +191,7 @@ export function renderNotFound() {
     <div class="grid-row">
       <div class="col-12" style="text-align: center; padding: var(--space-2xl) 0;">
         <h2>404 - Página Não Encontrada</h2>
-        <p style="margin: var(--space-sm) 0;">O endereço requisitado não corresponde a uma seção da plataforma.</p>
+        <p style="margin: var(--space-sm) 0;">O endereço solicitado não existe.</p>
         <a href="#/" class="btn-primary">Voltar para o Início</a>
       </div>
     </div>

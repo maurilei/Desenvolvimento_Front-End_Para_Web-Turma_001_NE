@@ -117,6 +117,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   navigate(inicializarCadastro);
+
+  // Alternador de Alto Contraste Acessível
+  const btnContrast = document.getElementById('btnContrastToggle');
+  if (btnContrast) {
+    btnContrast.addEventListener('click', () => {
+      document.body.classList.toggle('high-contrast');
+    });
+  }
 });
 
 window.addEventListener('hashchange', () => navigate(inicializarCadastro));
