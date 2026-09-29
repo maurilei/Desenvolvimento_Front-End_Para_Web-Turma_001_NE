@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ONG Mãos Solidárias - SPA Institucional</title>
+  
+  <!-- Folha de Estilos Principal -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  
+  <!-- Biblioteca Externa: SweetAlert2 via CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+  <!-- ==================== CABEÇALHO GLOBAL DA SPA ==================== -->
+  <header>
+    <div class="grid-container header-container">
+      <a href="#/" class="logo-link">
+        <img src="assets/imagens/logotipo-ong.png" alt="Logotipo da ONG Mãos Solidárias" width="180" height="60">
+      </a>
+
+      <!-- Gatilho Hambúrguer para Mobile -->
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu de navegação">
+        <span class="menu-toggle__bar"></span>
+        <span class="menu-toggle__bar"></span>
+        <span class="menu-toggle__bar"></span>
+      </button>
+
+      <!-- Navegação SPA por Hash -->
+      <nav class="main-nav" id="mainNav">
+        <ul class="nav-list">
+          <li><a href="#/">Início</a></li>
+          <li class="has-dropdown" id="dropdownProjetos">
+            <a href="#/projetos">Projetos ▾</a>
+            <ul class="dropdown-menu">
+              <li><a href="#/projetos">Ver Todos os Projetos</a></li>
+            </ul>
+          </li>
+          <li><a href="#/cadastro">Seja Voluntário</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==================== CONTÊINER DINÂMICO (INJEÇÃO VIA JS) ==================== -->
+  <main id="app" class="grid-container" style="padding-top: var(--space-lg);"></main>
+
+  <!-- ==================== ELEMENTOS DE FEEDBACK GLOBAIS ==================== -->
+  <!-- Toast não-obstrutivo -->
+  <aside class="toast-notification">
+    ✨ Campanha 2026: 120 novas cestas entregues hoje!
+  </aside>
+
+  <!-- Modal Contextual Demonstrativo -->
+  <div class="modal-overlay" id="modalTransparencia" style="display: none;">
+    <div class="modal-box">
+      <h3>Transparência e Governança</h3>
+      <p style="margin-block: var(--space-sm); color: var(--color-neutral-medium);">
+        Todas as doações e cadastros de voluntariado são auditados e aplicados rigorosamente nos projetos comunitários da instituição.
+      </p>
+      <button class="btn-primary" onclick="document.getElementById('modalTransparencia').style.display='none'">Concordar e Fechar</button>
+    </div>
+  </div>
+
+  <!-- ==================== RODAPÉ GLOBAL ==================== -->
+  <footer>
+    <p>&copy; 2026 ONG Mãos Solidárias. Todos os direitos reservados.</p>
+  </footer>
+
+  <!-- ==================== SCRIPT PRINCIPAL ==================== -->
+  <script type="module" src="assets/js/main.js"></script>
+</body>
+</html>

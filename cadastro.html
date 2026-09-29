@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro de Voluntários - ONG Mãos Solidárias</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- ==================== CABEÇALHO ==================== -->
+  <header>
+    <div class="grid-container header-container">
+      <a href="index.html" class="logo-link">
+        <img src="assets/imagens/logotipo-ong.png" alt="Logotipo da ONG Mãos Solidárias" width="180" height="60">
+      </a>
+
+      <!-- Botão Hambúrguer Mobile -->
+      <button class="menu-toggle" aria-label="Abrir menu" onclick="document.querySelector('.main-nav').classList.toggle('is-open')">
+        <span class="menu-toggle__bar"></span>
+        <span class="menu-toggle__bar"></span>
+        <span class="menu-toggle__bar"></span>
+      </button>
+
+      <!-- Navegação Principal -->
+      <nav class="main-nav">
+        <ul class="nav-list">
+          <li><a href="index.html">Início</a></li>
+          <li class="has-dropdown" onclick="this.classList.toggle('is-expanded')">
+            <a href="projetos.html">Projetos ▾</a>
+            <ul class="dropdown-menu">
+              <li><a href="projetos.html#horta">Horta Solidária</a></li>
+              <li><a href="projetos.html#reforco">Reforço Escolar</a></li>
+            </ul>
+          </li>
+          <li><a href="cadastro.html">Seja Voluntário</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==================== FORMULÁRIO DE INSCRIÇÃO ==================== -->
+  <main class="grid-container" style="padding-top: var(--space-xl);">
+    
+    <!-- Alertas de Feedback no Topo -->
+    <div class="grid-row">
+      <div class="col-12" style="max-width: 600px; margin-inline: auto;">
+        <div class="alert alert-success">
+          <strong>Processo Seletivo 2026:</strong> Estamos com vagas abertas para projetos comunitários!
+        </div>
+      </div>
+    </div>
+
+    <!-- Container do Formulário Semântico -->
+    <div class="grid-row">
+      <div class="col-12" style="max-width: 600px; margin-inline: auto;">
+        <div class="card-project">
+          <div>
+            <h2>Seja um Voluntário</h2>
+            <p style="color: var(--color-neutral-medium); margin-top: var(--space-2xs); margin-bottom: var(--space-md);">
+              Preencha os dados abaixo para fazer parte da nossa rede de apoio social.
+            </p>
+          </div>
+
+          <form action="#" method="post" novalidate onsubmit="event.preventDefault(); document.getElementById('toastConfirm').style.display='block';">
+            
+            <!-- Campo: Nome Completo -->
+            <div class="form-control">
+              <label for="nome">Nome Completo</label>
+              <input 
+                type="text" 
+                id="nome" 
+                class="form-input" 
+                placeholder="Ex: Maria da Silva" 
+                required 
+                minlength="3"
+              >
+              <span class="form-feedback">Por favor, insira seu nome completo (mínimo 3 caracteres).</span>
+            </div>
+
+            <!-- Campo: E-mail -->
+            <div class="form-control">
+              <label for="email">E-mail para Contato</label>
+              <input 
+                type="email" 
+                id="email" 
+                class="form-input" 
+                placeholder="exemplo@dominio.com" 
+                required
+              >
+              <span class="form-feedback">Insira um endereço de e-mail válido (deve conter @ e domínio).</span>
+            </div>
+
+            <!-- Campo: Telefone -->
+            <div class="form-control">
+              <label for="telefone">Telefone / WhatsApp</label>
+              <input 
+                type="tel" 
+                id="telefone" 
+                class="form-input" 
+                placeholder="(11) 99999-9999" 
+                required
+              >
+              <span class="form-feedback">Informe um telefone de contato.</span>
+            </div>
+
+            <!-- Campo: Seleção de Área -->
+            <div class="form-control">
+              <label for="area">Área de Atuação Desejada</label>
+              <select id="area" class="form-select" required>
+                <option value="">Selecione uma modalidade</option>
+                <option value="horta">Horta Solidária e Distribuição</option>
+                <option value="educacao">Reforço Escolar e Oficinas</option>
+                <option value="logistica">Triagem e Arrecadação de Alimentos</option>
+                <option value="comunicacao">Comunicação e Redes Sociais</option>
+              </select>
+            </div>
+
+            <!-- Campo: Mensagem Opcional -->
+            <div class="form-control">
+              <label for="mensagem">Por que deseja ser voluntário? (Opcional)</label>
+              <textarea id="mensagem" class="form-textarea" rows="4" placeholder="Conte um pouco sobre suas motivações ou experiências anteriores..."></textarea>
+            </div>
+
+            <!-- Botões de Ação -->
+            <div style="display: flex; gap: var(--space-sm); margin-top: var(--space-md); flex-wrap: wrap;">
+              <button type="submit" class="btn-primary" style="flex: 1;">
+                Enviar Cadastro
+              </button>
+              <a href="index.html" class="btn-primary" style="background-color: var(--color-neutral-medium); text-decoration: none;">
+                Cancelar
+              </a>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Notificação Toast (Ativada ao simular o envio) -->
+  <aside class="toast-notification" id="toastConfirm" style="display: none;">
+    ✅ Inscrição enviada com sucesso! Em breve entraremos em contato.
+  </aside>
+
+  <!-- ==================== RODAPÉ ==================== -->
+  <footer>
+    <p>&copy; 2026 ONG Mãos Solidárias. Todos os direitos reservados.</p>
+  </footer>
+
+</body>
+</html>
